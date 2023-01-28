@@ -1,0 +1,81 @@
+#include <crails/i18n.hpp>
+#include <crails/cms/views/menu.hpp>
+#include <crails/cms/models/settings.hpp>
+#include <crails/cms/opengraph.hpp>
+#include "lib/assets.hpp"
+#include "src/style.hpp"
+
+const char* @yield;
+const Crails::Cms::Settings& @settings;
+const Crails::Cms::OpenGraph* @open_graph = nullptr;
+std::string @page_title = settings.get_title();
+std::string @main_menu = "main-menu";
+bool @render_footer;
+PluginStyle style;
+
+// END LINKING
+<html lang="<%= i18n::Settings::current_locale %>">
+  <head>
+    <title><%= page_title %></title>
+    <meta charset="utf-8">
+    <% if (open_graph) do -%>
+      <%= open_graph->render() %>
+    <% end -%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <%= tag("link", {{"rel","stylesheet"},{"href",PluginAssets::layout_css}}) %>
+  </head>
+  <body class="live" data-scroll-id="smooth-scroll-top">
+
+    <div id="ms-preload" class="ms-preload">
+      <div id="status"></div>
+    </div>
+
+    <div class="sb-site-container">
+
+      <header class="ms-header ms-header-primary">
+        <div class="container container-full">
+          <div class="ms-title">
+            <a href="/">
+              <span class="ms-logo animated zoomInDown animation-delay-5">P</span>
+              <h1 class="animated fadeInRight animation-delay-6">
+                PlanED<span>Education</span>
+              </h1>
+            </a>
+          </div>
+          <div class="header-right">
+          </div>
+        </div>
+      </header>
+
+      <nav class="navbar navbar-static-top yamm ms-navbar ms-navbar-primary">
+        <div class="container container-full">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              <span class="ms-logo ms-logo-sm">P</span>
+              <span class="ms-title">Plan<strong>ED</strong></span>
+            </a>
+          </div>
+          <%= Crails::Cms::RenderMenu(main_menu, this)
+            .with_style(&style)
+            .with_direction(Crails::Cms::Menu::Horizontal)
+            .with_class({"navbar-right"})
+            ()
+          %>
+        </div>
+      </nav>
+
+      <div id="main">
+        <% if (yield != nullptr) do %>
+          <%= yield %>
+        <% end %>
+
+        <% if (render_footer) do -%>
+          <%= settings.get_footer() %>
+        <% end -%>
+      </div>
+    </div>
+    <!-- end sb-site-container -->
+    <%= tag("script", {{"src", "http://" + settings.get_public_url() + PluginAssets::bundle_js}}) %>
+  </body>
+</html>

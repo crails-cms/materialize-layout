@@ -1,0 +1,89 @@
+.ms-footbar {
+  background-color: #607d8b;
+  color: #eee;
+  position: relative;
+  margin-top: 4rem;
+
+  .ms-footer-block {
+    margin: 2rem 0;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .row {
+    margin-bottom: 0;
+    @media (min-width: 601px) {
+      display: flex;
+    }
+  }
+
+  .row > div {
+    flex-grow: 1;
+    padding: 0.5em;
+    &:nth-of-type(odd) {
+      background-color: #455a64;
+    }
+  }
+}
+
+.ms-footer {
+  padding: 1.2rem 0;
+  text-align: center;
+  background-color: #3b4c55;
+  color: #bdbdbd;
+  box-shadow: inset 0 2px 2px 0 rgb(0 0 0 / 14%), inset 0 3px 1px -2px rgb(0 0 0 / 20%), inset 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+[data-component="footer"] {
+  .ms-footbar-title {
+    margin: 0 5px;
+  }
+
+  .row > div:nth-of-type(odd) .btn-circle {
+    background-color: #5a7d8b;
+  }
+
+  .btn-circle {
+    margin: 0.5em;
+    i {
+      color: white;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .btn-circle.facebook:before {
+    background-color: #3b5998;
+  }
+  .btn-circle.youtube:before {
+    background-color: #b00;
+  }
+  .btn-circle.linkedin:before {
+    background-color: #007bb6;
+  }
+  .btn-circle.instagram:before {
+    background-color: #405DE6;
+  }
+
+  [data-component="address"] {
+    .ms-footbar-title {
+      h2, h3 {
+        vertical-align: middle;
+        display: inline;
+      }
+    }
+
+    address {
+      i { margin-right: 1rem; display: inline-block; with: 1rem; }
+      [data-type=address] i { color: #f48a88; }
+      [data-type=city]    i { color: #ffb54a; }
+      [data-type=mail]    i { color: #3cccde; }
+      [data-type=phone]   i { color: #cd92d7; }
+    }
+  }
+}

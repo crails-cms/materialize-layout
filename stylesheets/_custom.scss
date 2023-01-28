@@ -1,0 +1,31 @@
+/*
+ * Patches for the origin style
+ */
+.ms-footbar {
+  margin-top: 0;
+  &::before {
+    height: 0;
+  }
+}
+
+.ms-navbar {
+  margin-bottom: 0;
+}
+
+/*
+ * Component styles
+ */
+[data-component="decoratedRibbon"].wrap:before {
+  display: block;
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0; right: 0; top: 0; bottom: 0;
+  width: 100%;
+  opacity: 0.8;
+}
+
+[data-component="infoCard"] {
+  color: #757575;
+}
+

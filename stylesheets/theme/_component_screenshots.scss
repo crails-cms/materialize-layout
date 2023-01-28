@@ -1,0 +1,30 @@
+[data-component="screenshots"] {
+  position: relative;
+  .ms-hero-img {
+    > div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding-top: 10%;
+      padding-bottom: 21%;
+      padding-left: 7%;
+      padding-right: 5%;
+
+      .tns-liveregion {
+        display: none;
+      }
+
+      .tns-inner {
+        overflow: hidden;
+      }
+      
+      .tns-item {
+        height: 100%;
+      }
+    }
+  }
+}
+

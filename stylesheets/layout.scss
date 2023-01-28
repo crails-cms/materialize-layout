@@ -1,0 +1,21 @@
+@import "theme";
+@import "custom";
+
+.wrap {
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  animation: moveBack;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.ms-preload {
+  transition: opacity ease-in .5s;
+}
