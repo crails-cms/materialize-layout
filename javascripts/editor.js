@@ -1,6 +1,6 @@
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad ninim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comodo consequat. Duis aute irure dolor.";
 
-PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComponentEditor.Model {
+Cms.PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComponentEditor.Model {
   get maxColumns() { return 12; }
   get gridClassList() { return ["row"]; }
   get componentClassPattern() { return /^(col|[sml][0-9]{1,2})$/; }
@@ -22,7 +22,7 @@ function addAnimationClass(element, animation, delay = null) {
     element.classList.add(`${animationPrefix}${delay}s`);
 }
 
-class InfoCardComponent extends PageEditor.GridComponentEditor() {
+class InfoCardComponent extends Cms.PageEditor.GridComponentEditor() {
   initializeProperties() {
     this.properties.image = { type: "image", target: this.image, attribute: "src" };
     this.properties.tint = { type: "color", target: this, attribute: "tint" };
@@ -78,7 +78,7 @@ class InfoCardComponent extends PageEditor.GridComponentEditor() {
   }
 }
 
-class ContentComponent extends PageEditor.GridComponentEditor() {
+class ContentComponent extends Cms.PageEditor.GridComponentEditor() {
   initializeProperties() {
     super.initializeProperties();
   }
@@ -93,7 +93,7 @@ class ContentComponent extends PageEditor.GridComponentEditor() {
   }
 }
 
-class PictureComponent extends PageEditor.GridComponentEditor() {
+class PictureComponent extends Cms.PageEditor.GridComponentEditor() {
   initializeProperties() {
     this.properties.image = { type: "image", target: this.image, attribute: "src" };
     super.initializeProperties();
@@ -114,7 +114,7 @@ class PictureComponent extends PageEditor.GridComponentEditor() {
   }
 }
 
-class ScreenshotsComponent extends PageEditor.GridComponentEditor() {
+class ScreenshotsComponent extends Cms.PageEditor.GridComponentEditor() {
   initializeProperties() {
     this.properties.images = { type: "images", target: this, attribute: "images" };
     this.properties.interval = { type: "number", target: this.root.dataset, attribute: "interval", min: 0 };
@@ -177,11 +177,11 @@ const gridComponents = {
   card:        ContentComponent,
   picture:     PictureComponent,
   infoCard:    InfoCardComponent,
-  slider:      PageEditor.SliderComponentEditor,
+  slider:      Cms.PageEditor.SliderComponentEditor,
   screenshots: ScreenshotsComponent
 };
 
-class RibbonComponent extends PageEditor.NestedComponentEditor {
+class RibbonComponent extends Cms.PageEditor.NestedComponentEditor {
   constructor(parent, element) {
     const components = {};
     for (let component in gridComponents)
@@ -279,7 +279,7 @@ class DecoratedRibbonComponent extends RibbonComponent {
   }
 }
 
-class FooterSocialsComponent extends PageEditor.GridComponentEditor(PageEditor.SocialComponentEditor) {
+class FooterSocialsComponent extends Cms.PageEditor.GridComponentEditor(PageEditor.SocialComponentEditor) {
   constructor(parent, element) {
     super(parent, element);
     this.socials = {
@@ -328,7 +328,7 @@ class FooterSocialsComponent extends PageEditor.GridComponentEditor(PageEditor.S
   }
 }
 
-class FooterAddressComponent extends PageEditor.GridComponentEditor() {
+class FooterAddressComponent extends Cms.PageEditor.GridComponentEditor() {
   initializeProperties() {
     this.properties.phone = { type: "phone", target: this.phone, attribute: "textContent" };
     this.properties.address = { type: "text", target: this.address, attribute: "textContent" };
@@ -379,7 +379,7 @@ class FooterAddressComponent extends PageEditor.GridComponentEditor() {
   }
 }
 
-class FooterCardComponent extends PageEditor.GridComponentEditor() {
+class FooterCardComponent extends Cms.PageEditor.GridComponentEditor() {
   create() {
     const content = document.createElement("div");
 
@@ -389,7 +389,7 @@ class FooterCardComponent extends PageEditor.GridComponentEditor() {
   }
 }
 
-class FooterComponent extends PageEditor.FooterComponentEditor {
+class FooterComponent extends Cms.PageEditor.FooterComponentEditor {
   constructor(parent, element) {
     super(parent, element, {
       card:    FooterCardComponent,
@@ -422,7 +422,7 @@ class FooterComponent extends PageEditor.FooterComponentEditor {
   }
 }
 
-class MaterialLandingLayoutEditor extends PageEditor.LayoutEditor {
+class MaterialLandingLayoutEditor extends Cms.PageEditor.LayoutEditor {
   constructor(element) {
     super(element, {
       ribbon: RibbonComponent,

@@ -1,10 +1,33 @@
 #include "style.hpp"
+#include "lib/assets.hpp"
 #include <crails/html_template.hpp>
 #include <crails/utils/random_string.hpp>
 
 using namespace std;
 using namespace Crails;
 using namespace Crails::Cms;
+
+vector<string> PluginStyle::stylesheets() const
+{
+  return {
+    "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css",
+    "https://fonts.googleapis.com/icon?family=Material+Icons",
+    PluginAssets::layout_css
+  };
+}
+
+vector<string> PluginStyle::admin_stylesheets() const
+{
+  vector<string> base = stylesheets();
+
+  base.push_back(PluginAssets::admin_css);
+  return base;
+}
+
+std::string_view PluginStyle::admin_layout() const
+{
+  return "layouts/materialize/admin";
+}
 
 static string render_menu_list(const Style& style, Data data, map<string,string> attributes = {});
 
@@ -71,6 +94,20 @@ string PluginStyle::render_menu(const Menu& menu, Menu::Direction direction, con
     {"class", classlist},
     {"data-name", menu.get_name()}
   }, yield);
+}
+
+string PluginStyle::section(int index, const map<string,string>& attrs, function<string()> yield) const
+{
+  map<string,string> section_attrs = attrs;
+  string section_class = "container";
+
+  if (section_attrs.count("class"))
+    section_class += ' ' + section_attrs.at("class");
+  section_attrs.insert_or_assign("class", section_class);
+  return HtmlTemplate::tag("section", section_attrs, [&]() -> string
+  {
+    return HtmlTemplate::tag("div", {{"class","row wow animate__fadeInDown animate__1s"}}, yield);
+  });
 }
 
 string PluginStyle::javascript_on_content_loaded() const

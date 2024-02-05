@@ -33,6 +33,11 @@ public:
   ClassList collection_item_classes() const override { return {"collection-item"}; }
 
   std::string render_menu(const Crails::Cms::Menu& menu, Crails::Cms::Menu::Direction direction, const Crails::Cms::ClassList& classlist, const std::string& header) const override;
+  std::string section(int index, const std::map<std::string,std::string>& attrs, std::function<std::string()> yield) const override;
 
   std::string javascript_on_content_loaded() const override;
+
+  std::vector<std::string> stylesheets() const override;
+  std::vector<std::string> admin_stylesheets() const override;
+  std::string_view admin_layout() const override;
 };

@@ -1,9 +1,20 @@
+@import "admin/main";
+
+.container .content {
+  padding: 0 !important;
+}
+
+.btn-group > form {
+  display: inline-block;
+}
+
 .proudcms-page-editor {
-  @import "theme";
   @import "custom";
 
   .container {
     width: 100% !important;
+    @import "theme";
+    @import "custom";
   }
 
   .wrap {

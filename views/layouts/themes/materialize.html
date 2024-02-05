@@ -1,29 +1,33 @@
 #include <crails/i18n.hpp>
 #include <crails/cms/views/menu.hpp>
 #include <crails/cms/models/settings.hpp>
+#include <crails/cms/plugins.hpp>
 #include <crails/cms/opengraph.hpp>
 #include "lib/assets.hpp"
 #include "src/style.hpp"
 
+PluginStyle style;
 const char* @yield;
 const Crails::Cms::Settings& @settings;
+const Crails::Cms::Plugins* plugins = Crails::Cms::Plugins::singleton::get();
 const Crails::Cms::OpenGraph* @open_graph = nullptr;
 std::string @page_title = settings.get_title();
 std::string @main_menu = "main-menu";
 bool @render_footer;
-PluginStyle style;
 
 // END LINKING
 <html lang="<%= i18n::Settings::current_locale %>">
   <head>
     <title><%= page_title %></title>
     <meta charset="utf-8">
-    <% if (open_graph) do -%>
-      <%= open_graph->render() %>
+    <%= partial("layouts/head") %>
+    <% for (const auto& stylesheet : style.stylesheets()) do -%>
+      <%= tag("link", {{"rel","stylesheet"},{"href",stylesheet}}) %>
     <% end -%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <%= tag("link", {{"rel","stylesheet"},{"href",PluginAssets::layout_css}}) %>
+    <% if (plugins && plugins->has_plugins()) do -%>
+      <%= tag("link", {{"rel", "stylesheet"},{"href", Crails::Cms::Plugins::application_css_uri}}) %>
+      <%= tag("script", {{"src", Crails::Cms::Plugins::application_js_uri}}) %>
+    <% end -%>
   </head>
   <body class="live" data-scroll-id="smooth-scroll-top">
 
