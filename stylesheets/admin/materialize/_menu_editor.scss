@@ -1,0 +1,31 @@
+#menuForm {
+  > .input-field:nth-of-type(2) { padding-top: 2em; }
+  .float-right { float: right; }
+
+  #menuEditorForm {
+    padding-left: 1em;
+  }
+
+  .menu-editor-item {
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    &:not(:first-of-type) {
+      border-top: 0;
+    }
+  }
+
+  .menu-editor-label {
+    display: flex;
+    .txt { flex-grow: 3; }
+    .controls {
+      min-width: 160px;
+      text-align: right;
+    }
+  }
+
+  .btn-small {
+    height: 28px;
+    padding: 0 10px;
+    i { font-size: 1em !important; }
+  }
+}

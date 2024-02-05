@@ -1,0 +1,39 @@
+#include <crails/cms/views/style.hpp>
+#include <crails/cms/models/settings.hpp>
+#include <crails/cms/plugins.hpp>
+#include <crails/cms/lib/assets.hpp>
+#include <crails/icons.hpp>
+#include "lib/assets.hpp"
+
+Crails::Cms::Style* @style = Crails::Cms::Style::singleton::get();
+const Crails::Cms::Plugins* plugins = Crails::Cms::Plugins::singleton::get();
+const Crails::Cms::Settings& @settings;
+
+// END LINKING
+<% if (style) do -%>
+  <script>
+    function crailscms_on_content_loaded(document) {<%= style->javascript_on_content_loaded() %>}
+    document.addEventListener("DOMContentLoaded", function() { crailscms_on_content_loaded(document); });
+  </script>
+<% end -%>
+<% if (settings.get_favicon().length()) do -%>
+  <%= tag("link", {{"rel", "icon"},{"href", settings.get_favicon()}}) %>
+<% end -%>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+<%= tag("link", {{"rel", "stylesheet"},{"href", CrailsCmsAssets::admin_css}}) %>
+<%= Crails::fonticon_cdn_header() %>
+<%= tag("script", {{"src", CrailsCmsAssets::admin_js}}) %>
+
+<link rel="stylesheet" href="https://materializecss.com/css/ghpages-materialize.css">
+
+<%= tag("link", {{"rel", "stylesheet"},{"href", PluginAssets::admin_css}}) %>
+<%= tag("script", {{"src", PluginAssets::materialize_js}}) %>
+
+<% if (plugins && plugins->has_plugins()) do -%>
+  <%= tag("link", {{"rel", "stylesheet"},{"src", Crails::Cms::Plugins::admin_css_uri}}) %>
+  <%= tag("script", {{"src", Crails::Cms::Plugins::admin_js_uri}}) %>
+<% end -%>

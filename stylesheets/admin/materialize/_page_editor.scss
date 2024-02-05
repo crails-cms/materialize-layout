@@ -1,0 +1,70 @@
+@import "page_editor_reset";
+
+.proudcms-sticky-controls {
+  z-index: 2;
+}
+
+.ct-widget.ct-ignition {
+  display: none !important;
+}
+
+.ct-widget.ct-anchored-dialog {
+  background-color: white;
+  input, input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    margin: 5px !important;
+    margin-top: -5px !important;
+  }
+}
+
+.proudcms-page-editor {
+  margin-bottom: 2em;
+}
+
+.proudcms-page-editor-controls {
+  display: flex !important;
+  .brand-logo {
+    position: initial !important;
+    margin: 0 0.5em;
+    font-size: 1.2em;
+    transform: none;
+  }
+  > ul { display: inline-block !important; }
+  > ul > li > a { color: white !important; }
+  > ul > li > a > i { line-height: 56px; font-size: 15px; }
+}
+
+.page-property-editor {
+  .property {
+    margin-top: 1em;
+  }
+
+  .range-field {
+    display: flex;
+    input { margin-right: 1em; }
+  }
+
+  .input-field {
+    label {
+      position: initial;
+    }
+
+    label[data-type="image"]  + .input-group,
+    label[data-type="file"] + .input-group {
+      display: flex;
+      align-items: center;
+      input { margin-right: 1em; }
+    }
+
+    .input-group.optional {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  input[type=color] {
+    width: 100%;
+    padding: 0;
+  }
+}

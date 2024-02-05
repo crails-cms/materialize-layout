@@ -1,0 +1,9 @@
+.opengraph-popup {
+  [data-name='url'] > div {
+    display: flex;
+  }
+  [data-name='image:height'], [data-name='image:width'] {
+    display: inline-block;
+    width: 50%;
+  }
+}

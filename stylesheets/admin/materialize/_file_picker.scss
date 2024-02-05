@@ -1,0 +1,57 @@
+#proudcms-file-picker {
+  .search-form {
+    min-width: 50px;
+  }
+
+  .collection-item {
+    position: relative;
+    min-height: 6em;
+    padding-left: 6em;
+    padding-right: 1em;
+    transition: all 250ms;
+
+    @media (min-width: 800px) {
+      width: 50%;
+      display: inline-block;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ddd;
+    }
+
+    .miniature {
+      position: absolute;
+      left: 0.2em;
+      top: 0.2em;
+      bottom: 0.2em;
+      img, video, audio {
+        position: absolute;
+        max-width: 5em; max-height: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 1px solid #e0e0e0;
+      }
+    }
+
+    .name, .caption {
+      &::first-letter { text-transform: capitalize; }
+    }
+
+    .name {
+      text-overflow: ellipsis;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-decoration: underline;
+    }
+
+    .caption {
+      overflow: hidden;
+      max-height: 50px;
+      font-size: 0.8em;
+      line-height: 1em;
+      text-align: justify;
+    }
+  }
+}
