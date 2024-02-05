@@ -12,7 +12,10 @@ crails templates build \
 mkdir -p build/javascripts
 mkdir -p build/sass
 
-webpack
+npm install
+
+node_modules/.bin/webpack
+cp node_modules/@materializecss/materialize/dist/js/materialize.js build/javascripts/materialize.js
 cp javascripts/editor.js build/javascripts/editor.js
 
 node_modules/.bin/sass -s compressed "stylesheets/layout.scss" > build/sass/layout.css
