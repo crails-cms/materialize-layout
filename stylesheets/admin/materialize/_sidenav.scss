@@ -1,0 +1,9 @@
+ul.sidenav li {
+  // disconnect link
+  > form > a {
+    width: 100%;
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+}

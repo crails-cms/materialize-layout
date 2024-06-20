@@ -7,6 +7,11 @@ $tint : #26a69a;
 @import "materialize/page_editor";
 @import "materialize/menu_editor";
 @import "materialize/ckeditor";
+@import "materialize/sidenav";
+@import "tomSelect";
+@import "plugins";
+@import "settings";
+@import "../theme/form";
 
 .search-form {
   display: flex;
@@ -31,13 +36,6 @@ $tint : #26a69a;
   }
 }
 
-form label::first-letter {
-  text-transform: capitalize;
-}
-
-.btn-group > * { display: inline-block; }
-
-
 .nav-wrapper > a {
   font-size: 1.5em !important;
   line-height: 60px !important;
@@ -45,37 +43,67 @@ form label::first-letter {
 
 .modal {
   display: block !important;
-}
-
-.input-field {
-  label + a {
-    margin-top: 3em;
-  }
-
-  label[data-type="color"] {
-    position: initial !important;
+  padding: 0 1em;
+  .popup-title + .btn {
+    margin-top: 1.6em;
   }
 }
 
 .aligned-inputs {
   align-items: center;
   .input-field {
-    .select-wrapper {
+    label:has(+.select-wrapper), .select-wrapper {
       margin-top: -1.9em;
     }
   }
 }
 
-.thumbnail-form-group {
+.btn-group.cms-paginator {
+  text-align: center;
+}
+
+.tomselect-form-group {
+  label {
+    position: relative;
+    &::first-letter { text-transform: capitalize; }
+  }
+}
+
+.input-field label:has(+ #tagPicker) {
+  transform: translateY(-14px) scale(0.8);
+  transform-origin: 0 0;
+}
+
+.thumbnail-form-group, .audio-form-group {
   display: flex;
   align-items: center;
   input { margin-right: 1em !important; }
-  img { margin-left: 1em; max-width: 20%; }
+  button { min-width: 200px; }
+  img, audio { margin-left: 1em; max-width: 20%; }
 }
 
 .customized-form-group {
   label {
     position: initial;
+  }
+}
+
+.flash {
+  display: block;
+  padding: 24px;
+  margin: .5rem 0 1rem 0;
+  border-radius: 2px;
+  &.flash-info {
+    background-color: #4db6ac !important;
+  }
+  &.flash-error {
+    background-color: #f44336 !important;
+  }
+  &.flash-warning {
+    background-color: #cddc39 !important;
+  }
+  &.flash-success {
+    background-color: #00e676 !important;
   }
 }
 

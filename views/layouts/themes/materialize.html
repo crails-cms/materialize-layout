@@ -1,8 +1,9 @@
 #include <crails/i18n.hpp>
 #include <crails/cms/views/menu.hpp>
 #include <crails/cms/models/settings.hpp>
+#include <crails/cms/models/layout.hpp>
+#include <crails/cms/views/layout.hpp>
 #include <crails/cms/plugins.hpp>
-#include <crails/cms/opengraph.hpp>
 #include "lib/assets.hpp"
 #include "src/style.hpp"
 
@@ -10,10 +11,18 @@ PluginStyle style;
 const char* @yield;
 const Crails::Cms::Settings& @settings;
 const Crails::Cms::Plugins* plugins = Crails::Cms::Plugins::singleton::get();
-const Crails::Cms::OpenGraph* @open_graph = nullptr;
+const Crails::Cms::LayoutVariables& theme_variables = settings.get_layout().get_variables();
+const Data theme_settings = settings.get_theme_settings();
 std::string @page_title = settings.get_title();
 std::string @main_menu = "main-menu";
 bool @render_footer;
+DataTree& @flash;
+
+std::map<std::string,std::pair<std::string,std::string>> notices = {
+  {"error", {"red darken-1", "text-white"}},
+  {"success", {"green", "text-white"}},
+  {"info", {"blue", "text-white"}}
+};
 
 // END LINKING
 <html lang="<%= i18n::Settings::current_locale %>">
@@ -41,9 +50,9 @@ bool @render_footer;
         <div class="container container-full">
           <div class="ms-title">
             <a href="/">
-              <span class="ms-logo animated zoomInDown animation-delay-5">P</span>
+              <%= Crails::Cms::get_layout_value(theme_variables, theme_settings, "logo") %>
               <h1 class="animated fadeInRight animation-delay-6">
-                PlanED<span>Education</span>
+                <%= Crails::Cms::get_layout_value(theme_variables, theme_settings, "title") %>
               </h1>
             </a>
           </div>
@@ -70,6 +79,21 @@ bool @render_footer;
       </nav>
 
       <div id="main">
+        <% for (Data message : flash.as_data()) do -%>
+          <% auto notice = notices.find(message.get_key()) -%>
+          <% if (notice != notices.end()) do -%>
+            <div class="row flash-notice">
+              <div class="col s12 m12">
+                <div class="card <%= notice->second.first %>">
+                  <div class="card-content <%= notice->second.second %>">
+                    <%= message.as<std::string>() %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end -%>
+        <% end -%>
+
         <% if (yield != nullptr) do %>
           <%= yield %>
         <% end %>
@@ -80,6 +104,7 @@ bool @render_footer;
       </div>
     </div>
     <!-- end sb-site-container -->
-    <%= tag("script", {{"src", "http://" + settings.get_public_url() + PluginAssets::bundle_js}}) %>
+    <%= tag("script", {{"src", "//" + settings.get_public_url() + PluginAssets::bundle_js}}) %>
+    <%= tag("script", {}, std::bind(&PluginStyle::javascript_on_content_loaded, &style)) %>
   </body>
 </html>

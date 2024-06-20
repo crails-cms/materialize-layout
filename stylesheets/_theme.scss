@@ -10,9 +10,12 @@
 @import "theme/header";
 @import "theme/navbar";
 @import "theme/logo";
+@import "theme/flash";
 @import "theme/card_info";
 @import "theme/component_screenshots";
 @import "theme/component_ribbon";
+@import "theme/thumbnail";
+@import "theme/form";
 @import "theme/footer";
 
 .color-primary {
@@ -26,6 +29,12 @@
 .bg-info {
   background-color: #00bcd4!important;
   color: #fff;
+}
+
+.btn-group {
+  &.cms-paginator {
+    text-align: center;
+  }
 }
 
 .btn-circle {

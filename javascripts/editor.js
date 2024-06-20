@@ -1,9 +1,10 @@
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad ninim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea comodo consequat. Duis aute irure dolor.";
 
 Cms.PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComponentEditor.Model {
+  get minColumns() { return 1; }
   get maxColumns() { return 12; }
   get gridClassList() { return ["row"]; }
-  get componentClassPattern() { return /^(col|[sml][0-9]{1,2})$/; }
+  get componentClassPattern() { return /^(col|xl[0-9]{1,2}|[sml][0-9]{1,2})$/; }
   mediaSizeName(value) { return ['xl', 'l', 'm', 's'][value]; }
   sizeFromMediaName(value) {
     return {
@@ -12,9 +13,9 @@ Cms.PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComp
     }[value];
   }
   extractSizeAndSpanFromClassMatch(match) {
-    if (match[0] == "col") return ;
+    if (match[0] == "col") return null;
     return {
-      media: match[0][0],
+      media: match[0].startsWith("xl") ? "xl" : match[0][0],
       span: parseInt(match[0].slice(1)) / 12
     };
   }

@@ -1,0 +1,55 @@
+#include <crails/datatree.hpp>
+#include <crails/params.hpp>
+#include <crails/i18n.hpp>
+#include <crails/cms/views/menu.hpp>
+#include <crails/cms/views/admin_menu.hpp>
+
+Crails::Params& @params;
+DataTree& @flash;
+const char* @yield;
+std::string @page_title = "Wizard";
+std::string @page_subtitle = "Set up your site";
+// END LINKING
+<html lang="<%= i18n::Settings::current_locale %>">
+  <head>
+    <title><%= page_title %></title>
+    <meta charset="utf-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <link href="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.css" rel="stylesheet">
+
+    <%= partial("layouts/materialize/admin_head") %>
+    <%= partial("layouts/admin/routes") %>
+  </head>
+  <body class="admin custom-admin-style">
+    <%= partial("icons") %>
+
+    <main style="padding-left:0!important">
+      <div class="section" id="index-banner">
+        <div class="row" style="margin-bottom:0">
+          <div class="col s12 m10 offset-m1 xl10 offset-xl1 center-on-small-only">
+            <h1 class="header"><%= page_title %></h1>
+            <h4 class="light"><%= page_subtitle %></h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="container" style="padding-top:2em">
+        <div class="row">
+          <div class="section col s12 m10 offset-m1 xl10 offset-xl1">
+            <%= partial("flash_view", {{"flash", &flash}}) %>
+            <% if (yield != nullptr) do -%>
+              <%= yield %>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="sidenav-overlay" style="display:none; opacity: 0"></div>
+
+    <script type="text/javascript">
+      M.Sidenav.init(document.querySelector(".sidenav"))
+    </script>
+  </body>
+</html>

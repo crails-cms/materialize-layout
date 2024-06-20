@@ -1,0 +1,9 @@
+#cms-plugin-views {
+  > li > div {
+    flex-direction: row-reverse;
+    .image-block > img {
+      height: 64px;
+      margin-right: 1em;
+    }
+  }
+}

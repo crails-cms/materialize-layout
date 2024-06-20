@@ -1,0 +1,23 @@
+$input-focus-color: #4db6ac;
+$input-border-color: #9e9e9e;
+
+.ts-wrapper {
+  .ts-control {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid $input-border-color;
+    input {
+      height: 1.4rem;
+      width: initial;
+    }
+  }
+
+  &.focus .ts-control {
+    input { color: $input-focus-color; }
+    border-bottom: 1px solid $input-focus-color;
+  }
+}
+
+.input-field.tom-select > label {
+  position: relative;
+}

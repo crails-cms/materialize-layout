@@ -2,6 +2,7 @@ console.log("Mais tant d'eau dans ton ciboulot, ça aurait pu etre beau");
 
 import {tns} from "tiny-slider/src/tiny-slider.js";
 import wowjs from "wowjs";
+import materialize from "../node_modules/@materializecss/materialize/dist/js/materialize.js";
 
 const wow = new wowjs.WOW({
   animateClass: "animate__animated",
@@ -44,9 +45,11 @@ function loadScreenshots(element) {
   element.$slider = tns(options);
 }
 
-function hidePreloader() {
+function hidePreloader(forced) {
   const overlay = document.querySelector(".ms-preload");
 
+  if (forced)
+    overlay.style.transition = "initial";
   overlay.style.opacity = 0;
   overlay.style.pointerEvents = "none";
 }
@@ -58,13 +61,27 @@ export function loadSliders() {
   for (let element of document.querySelectorAll("[data-component=screenshots]")) {
     loadScreenshots(element);
   }
-  setTimeout(hidePreloader, 350);
-  wow.init();
+  if (document.referrer.startsWith(window.origin))
+    hidePreloader(1);
+  else
+    setTimeout(hidePreloader, 350);
+}
+
+export function loadMaterialize() {
+  document.querySelectorAll("input[type='checkbox']").forEach(input => {
+    const next = input.nextElementSibling;
+    if (next.classList.contains("helper")) {
+      next.addEventListener("click", function() { input.checked = !input.checked; });
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", loadSliders);
+document.addEventListener("DOMContentLoaded", loadMaterialize);
+document.addEventListener("DOMContentLoaded", wow.init.bind(wow));
 
 window.loadSliders = loadSliders;
+window.loadMaterialize = loadMaterialize;
 window.tns = tns;
 
 console.log("Mais tant d'eau dans ton ciboulot");

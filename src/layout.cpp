@@ -13,6 +13,8 @@ MaterializeLanding::MaterializeLanding()
   editor_stylesheets.push_back("https://fonts.googleapis.com/icon?family=Material+Icons");
   editor_stylesheets.push_back(PluginAssets::admin_css);
   editor_javascripts.push_back(PluginAssets::editor_js);
+  variables.push_back(Crails::Cms::LayoutVariable("title", "html", "Plan<span>ED</span>"));
+  variables.push_back(Crails::Cms::LayoutVariable("logo", "html", "<span class=\"ms-logo animated zoomInDown animation-delay-5\">P</span>"));
 }
 
 void MaterializeLanding::use_admin_style() const

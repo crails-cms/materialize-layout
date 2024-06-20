@@ -1,3 +1,25 @@
 .ck.ck-editor__main>.ck-editor__editable.ck-focused {
   border-color: $tint !important;
 }
+
+.input-field {
+  label:has(+ textarea + .ck-editor) {
+    transform: none !important;
+  }
+
+  label + textarea + .ck-editor {
+    padding-top: 1em;
+  }
+}
+
+.cms-ckeditor-button {
+  height: 40px;
+  border: 1px dotted lightgray;
+  border-bottom: 1px solid #26a69a;
+}
+
+.modal.ckeditor-dialog {
+  .modal-content {
+    padding: 0;
+  }
+}

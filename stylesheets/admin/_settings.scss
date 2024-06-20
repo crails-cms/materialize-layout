@@ -1,0 +1,10 @@
+.theme-form-group {
+  display: flex;
+  .select-wrapper, label {
+    margin-top: -2em;
+  }
+  .select-wrapper {
+    margin-right: 8px;
+    flex-grow: 1;
+  }
+}

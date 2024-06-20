@@ -29,6 +29,11 @@ std::string_view PluginStyle::admin_layout() const
   return "layouts/materialize/admin";
 }
 
+std::string_view PluginStyle::wizard_layout() const
+{
+  return "layouts/materialize/wizard";
+}
+
 static string render_menu_list(const Style& style, Data data, map<string,string> attributes = {});
 
 static string render_menu_item(const Style& style, Data item)
@@ -110,12 +115,57 @@ string PluginStyle::section(int index, const map<string,string>& attrs, function
   });
 }
 
+string PluginStyle::card(const map<string,string>& attrs, function<string()> yield) const
+{
+  map<string,string> card_attrs(attrs);
+  string block_classes = "card-block pt-4 text-center";
+
+  if (card_attrs.count("class"))
+    card_attrs["class"] = block_classes + card_attrs["class"];
+  else
+    card_attrs["class"] = block_classes;
+  return HtmlTemplate::tag("div", {{"class",card_classes()}}, [yield, card_attrs]() -> string
+  {
+    return HtmlTemplate::tag("div", card_attrs, yield);
+  });
+}
+
+string PluginStyle::thumbnail(const ClassList& classes, const string& src) const
+{
+  return HtmlTemplate::tag("img", {
+    {"src", src},
+    {"class", classes + "img-avatar-circle"}
+  });
+}
+
+string PluginStyle::breadcrumbs(const Crails::Cms::BreadcrumbsList& crumbs) const
+{
+  return "<nav style=\"text-align:center\">" +
+  HtmlTemplate::tag("div", map<string,string>{{"class", menu_wrapper_classes(Cms::Menu::Horizontal)}}, [&]() -> string
+  {
+    return HtmlTemplate::tag("div", {{"class", "col s12"}}, [&crumbs]() -> string
+    {
+      string html;
+
+      for (const auto& crumb : crumbs)
+      {
+        html += HtmlTemplate::tag("a", {{"class", "breadcrumb"}, {"href", crumb.first}}, [&crumb]() -> string
+        {
+          return crumb.second;
+        });
+      }
+      return html;
+    });
+  }) + "</nav>";
+}
+
 string PluginStyle::javascript_on_content_loaded() const
 {
   return
     "let elems = [];"
+    "let mainForm = document.querySelector('#main-form');"
     "for (let elem of document.querySelectorAll('select')) {"
-      "if (['tagPicker', 'fileTagPicker'].indexOf(elem.id) < 0) {"
+      "if (['tagPicker', 'fileTagPicker', 'userGroupPicker'].indexOf(elem.id) < 0) {"
         "M.FormSelect.init(elem, {});"
       "}"
     "}"
@@ -134,6 +184,18 @@ string PluginStyle::javascript_on_content_loaded() const
     "}"
     "for (let elem of document.querySelectorAll('input[type=datetime-local]')) {"
       "if (elem.previousElementSibling && elem.previousElementSibling.tagName == 'LABEL') { elem.previousElementSibling.classList.add('active'); }"
+    "}"
+    "for (let elem of document.querySelectorAll('.input-field > label + input[type=checkbox]')) {"
+      "const label = elem.previousElementSibling;"
+      "const text = document.createElement('span');"
+      "text.textContent = label.textContent;"
+      "label.textContent = '';"
+      "label.appendChild(elem);"
+      "label.appendChild(text);"
+      "label.style.position = 'relative';"
+      "label.style.pointerEvents = 'all';"
+      "label.parentElement.style.paddingBottom = '1em';"
+      "label.addEventListener('click', function() { elem.checked = !elem.checked; });"
     "}"
     ;
 }

@@ -1,0 +1,26 @@
+form label::first-letter {
+  text-transform: capitalize;
+}
+
+.btn-group > * { display: inline-block; }
+
+.input-field {
+  label {
+    &:not(:has(+[type=checkbox])) {
+      pointer-events: none;
+    }
+  }
+
+  label + a {
+    margin-top: 3em;
+  }
+
+  label[data-type="color"] {
+    position: initial !important;
+  }
+
+  label:has(+ .select-wrapper) {
+    transform: translateY(-14px) scale(0.8);
+    transform-origin: 0 0;
+  }
+}

@@ -1,5 +1,9 @@
 @import "page_editor_reset";
 
+#main-form[action='/admin/pages'] + .btn-group {
+  padding: 2em 0;
+}
+
 .proudcms-sticky-controls {
   z-index: 2;
 }
@@ -27,12 +31,12 @@
   .brand-logo {
     position: initial !important;
     margin: 0 0.5em;
-    font-size: 1.2em;
+    font-size: 1.2em !important;
     transform: none;
   }
   > ul { display: inline-block !important; }
   > ul > li > a { color: white !important; }
-  > ul > li > a > i { line-height: 56px; font-size: 15px; }
+  > ul > li > a > i { line-height: 56px; font-size: 15px !important; }
 }
 
 .page-property-editor {
