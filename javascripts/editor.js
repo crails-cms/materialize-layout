@@ -4,13 +4,27 @@ Cms.PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComp
   get maxColumns() { return 12; }
   get gridClassList() { return ["row"]; }
   get componentClassPattern() { return /^(col|[sml][0-9]{1,2})$/; }
-
-  componentClassList(span) {
-    return ["col", "s12", `m${span}`];
+  mediaSizeName(value) { return ['xl', 'l', 'm', 's'][value]; }
+  sizeFromMediaName(value) {
+    return {
+      'xl': this.sizes.VeryLarge, 'l': this.sizes.Large,
+      'm': this.sizes.Medium, 's': this.sizes.Small
+    }[value];
   }
-
-  componentClassListByRatio(ratio) {
-    return this.componentClassList(this.maxColumns * ratio);
+  extractSizeAndSpanFromClassMatch(match) {
+    if (match[0] == "col") return ;
+    return {
+      media: match[0][0],
+      span: parseInt(match[0].slice(1)) / 12
+    };
+  }
+  updateElementSizes(element, sizes) {
+    super.updateElementSizes(element, sizes);
+    element.classList.add("col");
+  }
+  classNameForSpan(media, span) {
+    const ratio = (span / this.maxColumns) * 12;
+    return `${media}${ratio}`;
   }
 };
 
