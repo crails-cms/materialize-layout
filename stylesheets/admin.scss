@@ -8,6 +8,10 @@
   display: inline-block;
 }
 
+.header, .header + .light {
+  text-align: center;
+}
+
 .proudcms-page-editor {
   @import "custom";
 
