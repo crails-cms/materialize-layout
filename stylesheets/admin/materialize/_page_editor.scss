@@ -1,6 +1,6 @@
 @import "page_editor_reset";
 
-#main-form[action='/admin/pages'] + .btn-group {
+#main-form[action^='/admin/pages'] + .btn-group {
   padding: 2em 0;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .proudcms-page-editor {
-  margin-bottom: 2em;
+  margin-bottom: 5em;
 }
 
 .proudcms-page-editor-controls {

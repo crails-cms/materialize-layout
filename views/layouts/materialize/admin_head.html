@@ -20,16 +20,12 @@ const Crails::Cms::Settings& @settings;
   <%= tag("link", {{"rel", "icon"},{"href", settings.get_favicon()}}) %>
 <% end -%>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-
+<%= tag("link", {{"rel", "stylesheet"},{"href", CrailsCmsAssets::pure_css}}) %>
 <%= tag("link", {{"rel", "stylesheet"},{"href", CrailsCmsAssets::admin_css}}) %>
 <%= Crails::fonticon_cdn_header() %>
 <%= tag("script", {{"src", CrailsCmsAssets::admin_js}}) %>
 
-<link rel="stylesheet" href="https://materializecss.com/css/ghpages-materialize.css">
-
+<%= tag("link", {{"rel", "stylesheet"},{"href", PluginAssets::ghpages_materialize_css}}) %>
 <%= tag("link", {{"rel", "stylesheet"},{"href", PluginAssets::admin_css}}) %>
 <%= tag("script", {{"src", PluginAssets::materialize_js}}) %>
 

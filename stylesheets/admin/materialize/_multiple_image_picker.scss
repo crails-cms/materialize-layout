@@ -1,0 +1,17 @@
+.input-field {
+  label + .multiple-picture-input {
+    margin: 2em auto;
+  }
+  label:has(+.multiple-picture-input) {
+    margin-top: -2em;
+  }
+}
+
+table.multiple-picture-input {
+  tr[data-type="file"] > td {
+    text-align: center;
+    > img {
+      max-height: 50px;
+    }
+  }
+}

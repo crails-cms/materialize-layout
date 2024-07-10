@@ -8,6 +8,7 @@ $tint : #26a69a;
 @import "materialize/menu_editor";
 @import "materialize/ckeditor";
 @import "materialize/sidenav";
+@import "materialize/multiple_image_picker";
 @import "tomSelect";
 @import "plugins";
 @import "settings";
@@ -52,8 +53,12 @@ $tint : #26a69a;
 .aligned-inputs {
   align-items: center;
   .input-field {
-    label:has(+.select-wrapper), .select-wrapper {
+    .select-wrapper {
       margin-top: -1.9em;
+    }
+    label:has(+.select-wrapper) {
+      transform: translateY(-14px) scale(0.8);
+      transform-origin: 0 0;
     }
   }
 }

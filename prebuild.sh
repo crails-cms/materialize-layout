@@ -17,9 +17,10 @@ npm install
 node_modules/.bin/webpack
 cp node_modules/@materializecss/materialize/dist/js/materialize.js build/javascripts/materialize.js
 cp javascripts/editor.js build/javascripts/editor.js
+cp stylesheets/ghpages-materialize.css build/sass/ghpages-materialize.css
 
-node_modules/.bin/sass -s compressed "stylesheets/layout.scss" > build/sass/layout.css
-node_modules/.bin/sass -s compressed "stylesheets/admin.scss"  > build/sass/admin.css
+node_modules/.bin/sass -I "node_modules/@materializecss" -s compressed "stylesheets/layout.scss" > build/sass/layout.css
+node_modules/.bin/sass -I "node_modules/@materializecss" -s  compressed "stylesheets/admin.scss"  > build/sass/admin.css
 
 crails-builtin-assets \
   --inputs "build/javascripts" "build/sass" \
