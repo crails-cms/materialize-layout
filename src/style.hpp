@@ -40,6 +40,7 @@ public:
   std::string breadcrumbs(const Crails::Cms::BreadcrumbsList&) const override;
 
   std::string javascript_on_content_loaded() const override;
+  std::string javascript_on_content_unload() const override;
 
   std::vector<std::string> stylesheets() const override;
   std::vector<std::string> admin_stylesheets() const override;

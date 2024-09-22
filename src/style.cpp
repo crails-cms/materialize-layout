@@ -199,3 +199,13 @@ string PluginStyle::javascript_on_content_loaded() const
     "}"
     ;
 }
+
+string PluginStyle::javascript_on_content_unload() const
+{
+  return
+    "let elems = [];"
+    "for (let elem of document.querySelectorAll('[data-tooltip]')) {"
+      "const tooltip = M.Tooltip.getInstance(elem);"
+      "if (tooltip) { tooltip.destroy(); }"
+    "}";
+}
