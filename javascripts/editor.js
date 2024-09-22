@@ -5,6 +5,7 @@ Cms.PageEditor.GridComponentEditor.model = new class extends PageEditor.GridComp
   get maxColumns() { return 12; }
   get gridClassList() { return ["row"]; }
   get componentClassPattern() { return /^(col|xl[0-9]{1,2}|[sml][0-9]{1,2})$/; }
+  widthFromSize(sizeId) { return [1201, 993, 601, 500][sizeId]; }
   mediaSizeName(value) { return ['xl', 'l', 'm', 's'][value]; }
   sizeFromMediaName(value) {
     return {
