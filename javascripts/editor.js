@@ -109,24 +109,11 @@ class ContentComponent extends Cms.PageEditor.GridComponentEditor() {
   }
 }
 
-class PictureComponent extends Cms.PageEditor.GridComponentEditor() {
-  initializeProperties() {
-    this.properties.image = { type: "image", target: this.image, attribute: "src" };
-    super.initializeProperties();
-  }
-
+class PictureComponent extends Cms.PageEditor.ImageComponentEditor {
   create() {
-    const image = document.createElement("img");
-
-    image.classList.add("img-responsive", "center-block");
-    addAnimationClass(image, "zoomIn", 2);
-    this.root.appendChild(image);
     super.create();
-  }
-
-  bindElements() {
-    this.image = this.root.querySelector("img");
-    super.bindElements();
+    this.image.classList.add("img-responsive", "center-block");
+    addAnimationClass(this.image, "zoomIn", 2);
   }
 }
 
