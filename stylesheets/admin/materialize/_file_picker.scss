@@ -1,4 +1,4 @@
-#proudcms-file-picker {
+#cms-file-picker, #cms-uri-picker {
   .search-form {
     min-width: 50px;
   }
@@ -53,6 +53,11 @@
       line-height: 1em;
       text-align: justify;
     }
+  }
+
+  .collection.no-miniatures .collection-item {
+    padding-left: 1em;
+    img, audio, video { display: none; }
   }
 
   .cms-paginator {

@@ -3,19 +3,26 @@
 #include <crails/cms/plugins.hpp>
 #include <crails/cms/lib/assets.hpp>
 #include <crails/icons.hpp>
+#include <crails/i18n.hpp>
 #include "lib/assets.hpp"
 
 Crails::Cms::Style* @style = Crails::Cms::Style::singleton::get();
 const Crails::Cms::Plugins* plugins = Crails::Cms::Plugins::singleton::get();
 const Crails::Cms::Settings& @settings;
 
+const std::string_view ckeditor_version = "35.4.0";
+
 // END LINKING
 <% if (style) do -%>
   <script>
     function crailscms_on_content_loaded(document) {<%= style->javascript_on_content_loaded() %>}
+    function crailscms_on_content_unload(document) {<%= style->javascript_on_content_unload() %>}
     document.addEventListener("DOMContentLoaded", function() { crailscms_on_content_loaded(document); });
   </script>
 <% end -%>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/<%= ckeditor_version %>/classic/translations/<%= i18n::locale_name() %>.js"></script>
+
 <% if (settings.get_favicon().length()) do -%>
   <%= tag("link", {{"rel", "icon"},{"href", settings.get_favicon()}}) %>
 <% end -%>
@@ -30,6 +37,6 @@ const Crails::Cms::Settings& @settings;
 <%= tag("script", {{"src", PluginAssets::materialize_js}}) %>
 
 <% if (plugins && plugins->has_plugins()) do -%>
-  <%= tag("link", {{"rel", "stylesheet"},{"src", Crails::Cms::Plugins::admin_css_uri}}) %>
+  <%= tag("link", {{"rel", "stylesheet"},{"href", Crails::Cms::Plugins::admin_css_uri}}) %>
   <%= tag("script", {{"src", Crails::Cms::Plugins::admin_js_uri}}) %>
 <% end -%>

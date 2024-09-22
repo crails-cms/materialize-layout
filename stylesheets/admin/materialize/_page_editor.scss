@@ -1,10 +1,27 @@
 @import "page_editor_reset";
 
+.cms-page-editor {
+  iframe {
+    box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+  }
+  .anchors-container {
+    > li.layout-anchor .btn {
+      background-color: blue;
+    }
+  }
+}
+
+body:not(.cms-page-editor-active) {
+  .cms-page-editor {
+    margin-bottom: 4em;
+  }
+}
+
 #main-form[action^='/admin/pages'] + .btn-group {
   padding: 2em 0;
 }
 
-.proudcms-sticky-controls {
+.cms-sticky-controls {
   z-index: 2;
 }
 
@@ -22,11 +39,26 @@
   }
 }
 
-.proudcms-page-editor {
-  margin-bottom: 5em;
+body.cms-page-editor-active.cms-page-editor-horizontal {
+  .cms-page-editor-toolbar {
+    transition: height 250ms ease-in;
+    .toolbar-controls {
+      transition: height 250ms ease-in;
+      height: 165px !important;
+    }
+    .component-menu {
+      .brand-logo { flex-grow: 1; overflow: hidden; max-width: 50%; }
+    }
+    &:hover {
+      height: 500px !important;
+      .toolbar-controls {
+        height: 370px !important;
+      }
+    }
+  }
 }
 
-.proudcms-page-editor-controls {
+.cms-page-editor-controls {
   display: flex !important;
   .brand-logo {
     position: initial !important;
@@ -37,6 +69,14 @@
   > ul { display: inline-block !important; }
   > ul > li > a { color: white !important; }
   > ul > li > a > i { line-height: 56px; font-size: 15px !important; }
+}
+
+.cms-page-editor-active {
+  .anchors-container li {
+    > a.btn {
+      color: white;
+    }
+  } 
 }
 
 .page-property-editor {
