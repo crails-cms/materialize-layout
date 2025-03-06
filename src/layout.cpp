@@ -1,5 +1,5 @@
 #include "layout.hpp"
-#include "lib/assets.hpp"
+#include "autogen/assets.hpp"
 #include "style.hpp"
 #include <iostream>
 

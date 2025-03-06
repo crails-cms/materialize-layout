@@ -1,6 +1,6 @@
 #include "layout.hpp"
-#include "lib/assets.hpp"
-#include "lib/renderers/plugin_html_renderer.hpp"
+#include "autogen/assets.hpp"
+#include "autogen/renderers/plugin_html_renderer.hpp"
 #include <fstream>
 
 extern "C"

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(materialize_layout_plugin)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pedantic -O3")
 
 find_package(PkgConfig)
 pkg_check_modules(CRAILS_CMS REQUIRED libcrails-cms>=2.0.0)
@@ -13,9 +13,9 @@ execute_process(COMMAND ./prebuild.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_D
 
 file(GLOB plugin_files
   src/*.cpp
-  lib/*.cpp
-  lib/renderers/*.cpp
-  lib/renderers/html/*.cpp)
+  autogen/*.cpp
+  autogen/renderers/*.cpp
+  autogen/renderers/html/*.cpp)
 
 add_library(materialize_layout SHARED ${plugin_files})
 set_property(TARGET materialize_layout PROPERTY ENABLE_EXPORTS ON)

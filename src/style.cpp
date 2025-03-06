@@ -1,5 +1,5 @@
 #include "style.hpp"
-#include "lib/assets.hpp"
+#include "autogen/assets.hpp"
 #include <crails/html_template.hpp>
 #include <crails/utils/random_string.hpp>
 
