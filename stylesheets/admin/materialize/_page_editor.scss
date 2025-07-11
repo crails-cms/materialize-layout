@@ -9,6 +9,10 @@
       background-color: blue;
     }
   }
+  + textarea[data-localized="1"]
+  + textarea.materialize-textarea {
+    display: none;
+  }
 }
 
 body:not(.cms-page-editor-active) {
@@ -94,8 +98,10 @@ body.cms-page-editor-active.cms-page-editor-horizontal {
       position: initial;
     }
 
-    label[data-type="image"]  + .input-group,
-    label[data-type="file"] + .input-group {
+    label[data-type="image"] + .input-group,
+    label[data-type="link"]  + .input-group,
+    label[data-type="href"]  + .input-group,
+    label[data-type="file"]  + .input-group {
       display: flex;
       align-items: center;
       input { margin-right: 1em; }

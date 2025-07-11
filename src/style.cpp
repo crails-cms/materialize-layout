@@ -2,26 +2,34 @@
 #include "autogen/assets.hpp"
 #include <crails/html_template.hpp>
 #include <crails/utils/random_string.hpp>
+#include <crails/cms/autogen/assets.hpp>
 
 using namespace std;
 using namespace Crails;
 using namespace Crails::Cms;
 
+const char* iconic_font_url = "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css";
+const char* material_icons_url = "https://fonts.googleapis.com/icon?family=Material+Icons";
+
 vector<string> PluginStyle::stylesheets() const
 {
   return {
-    "https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css",
-    "https://fonts.googleapis.com/icon?family=Material+Icons",
+    string(iconic_font_url),
+    string(material_icons_url),
     PluginAssets::layout_css
   };
 }
 
 vector<string> PluginStyle::admin_stylesheets() const
 {
-  vector<string> base = stylesheets();
-
-  base.push_back(PluginAssets::admin_css);
-  return base;
+  return {
+    CrailsCmsAssets::pure_css,
+    CrailsCmsAssets::admin_css,
+    string(iconic_font_url),
+    string(material_icons_url),
+    PluginAssets::ghpages_materialize_css,
+    PluginAssets::admin_css
+  };
 }
 
 std::string_view PluginStyle::admin_layout() const

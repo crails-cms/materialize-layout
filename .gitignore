@@ -1,7 +1,7 @@
 .*.swp
 .*.swo
 build/
-lib/
+autogen/
 node_modules/
 package-lock.json
 .sass-cache/

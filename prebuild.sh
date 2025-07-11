@@ -24,7 +24,7 @@ cp javascripts/editor.js build/javascripts/editor.js
 cp stylesheets/ghpages-materialize.css build/sass/ghpages-materialize.css
 
 $SASS_COMMAND -I "node_modules/@materializecss" -s compressed "stylesheets/layout.scss" > build/sass/layout.css
-$SASS_COMMAND -I "node_modules/@materializecss" -s  compressed "stylesheets/admin.scss"  > build/sass/admin.css
+$SASS_COMMAND -I "node_modules/@materializecss" -s compressed "stylesheets/admin.scss"  > build/sass/admin.css
 
 crails-builtin-assets \
   --inputs "build/javascripts" "build/sass" \

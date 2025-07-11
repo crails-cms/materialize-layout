@@ -1,42 +1,6 @@
-#include <crails/cms/views/style.hpp>
-#include <crails/cms/models/settings.hpp>
-#include <crails/cms/plugins.hpp>
-#include <crails/cms/autogen/assets.hpp>
-#include <crails/icons.hpp>
-#include <crails/i18n.hpp>
 #include "autogen/assets.hpp"
 
-Crails::Cms::Style* @style = Crails::Cms::Style::singleton::get();
-const Crails::Cms::Plugins* plugins = Crails::Cms::Plugins::singleton::get();
-const Crails::Cms::Settings& @settings;
-
-const std::string_view ckeditor_version = "35.4.0";
-
 // END LINKING
-<% if (style) do -%>
-  <script>
-    function crailscms_on_content_loaded(document) {<%= style->javascript_on_content_loaded() %>}
-    function crailscms_on_content_unload(document) {<%= style->javascript_on_content_unload() %>}
-    document.addEventListener("DOMContentLoaded", function() { crailscms_on_content_loaded(document); });
-  </script>
-<% end -%>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/<%= ckeditor_version %>/classic/translations/<%= i18n::locale_name() %>.js"></script>
-
-<% if (settings.get_favicon().length()) do -%>
-  <%= tag("link", {{"rel", "icon"},{"href", settings.get_favicon()}}) %>
-<% end -%>
-
-<%= tag("link", {{"rel", "stylesheet"},{"href", CrailsCmsAssets::pure_css}}) %>
-<%= tag("link", {{"rel", "stylesheet"},{"href", CrailsCmsAssets::admin_css}}) %>
-<%= Crails::fonticon_cdn_header() %>
-<%= tag("script", {{"src", CrailsCmsAssets::admin_js}}) %>
-
-<%= tag("link", {{"rel", "stylesheet"},{"href", PluginAssets::ghpages_materialize_css}}) %>
-<%= tag("link", {{"rel", "stylesheet"},{"href", PluginAssets::admin_css}}) %>
 <%= tag("script", {{"src", PluginAssets::materialize_js}}) %>
-
-<% if (plugins && plugins->has_plugins()) do -%>
-  <%= tag("link", {{"rel", "stylesheet"},{"href", Crails::Cms::Plugins::admin_css_uri}}) %>
-  <%= tag("script", {{"src", Crails::Cms::Plugins::admin_js_uri}}) %>
-<% end -%>
+<%= partial("layouts/admin/head") %>
